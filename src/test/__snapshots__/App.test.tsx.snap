@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App component > renders correct heading 1`] = `
+<div>
+  <button
+    data-testid="button"
+    type="button"
+  >
+    Click Me
+  </button>
+  <h1>
+    Magnificent Monkeys
+  </h1>
+</div>
+`;
