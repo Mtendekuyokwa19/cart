@@ -1,6 +1,10 @@
+import React from 'react'
+import { RouteSet } from './route'
+import "./index.css"
+export default function App() {
+  return (
 
-// App.jsx
+  <RouteSet/>
+)
+}
 
-const App = () => <h1>Our First Test</h1>;
-
-export default App
