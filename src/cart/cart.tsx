@@ -1,8 +1,15 @@
 import React from 'react'
+import { Product, ProductCard } from '../shop/shop'
+import { useState } from 'react';
+interface Icart{
+trolley:Product[]
+removeItem:any
+}
+export default function Cart({trolley,removeItem}:Icart) {
 
-export default function Cart() {
+
+
   return (
-    <div>cart</div>
-  )
+    <div>cart</div>)
 }
 
