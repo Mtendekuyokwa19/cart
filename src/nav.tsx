@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 
 export default function Nav() {
   return (
-<div className=' text-black h-screen w-screen overflow-x-hidden'  >
+<div className=' text-black h-screen w-screen'  >
 
   <nav className='sm:flex sm:justify-between sm:px-4 bg-gray-200 rounded-b'>
    <div className='flex p-4'>
