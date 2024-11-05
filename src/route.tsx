@@ -25,21 +25,24 @@ path:"cart",element:<Cart trolley={trolley} removeItem={removeItem} />
 
 
 export const RouteSet = () => {
-const [trolley,settrolley]=useState<Product[]>();
+let trolleyHolder:Product[]=[]
+const [trolley,settrolley]=useState<Product[]>(trolleyHolder);
 function AddItem(item:Product ){
 let trolleykeeper=trolley;
 trolleykeeper?.push(item)
 settrolley(trolleykeeper)
-
+console.log(item,trolley)
 }
 
 function removeItem(item:Product) {
- let itemAnalysis=item.alreadyincart(trolley as Product[]) 
-if(!itemAnalysis.incart){
-return
-}
+ let itemAnalysis=item?.alreadyincart(trolley as Product[]) 
+//console.log(trolley)
+//if(!itemAnalysis?.incart){
+//return
+//}
 let trolleykeeper=trolley;
 trolleykeeper?.splice(itemAnalysis.position,1)
+settrolley([])
 }
   return (
   <RouterProvider router={router(trolley as Product[],AddItem,removeItem)}/>

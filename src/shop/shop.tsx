@@ -19,7 +19,7 @@ setstatus({...status,error:true})
 }
 ).finally(()=>{
 
-setstatus({...status,loading:false})
+setstatus({loading:false,error:false})
 }
 )
 
@@ -53,7 +53,9 @@ seterror(status.error)
 },[])
   return (
 <div>
-<ShopItems Products={products as Product[]} AddItem={AddItem} removeItem={removeItem} cartProducts={cartProducts}/>
+{
+status.loading? <p>loading</p>:status.error? <p>Something went wrong</p>:<ShopItems Products={products as Product[]} AddItem={AddItem} removeItem={removeItem} cartProducts={cartProducts}/>
+}
 
 </div>
   )
@@ -115,6 +117,16 @@ removeItem:any
 cartProducts:Product[]
 }
 export const ProductCard = ({AddItems,removeItem,cartProducts,product}:IProduct) => {
+const [incart,setincart]=useState(product.alreadyincart(cartProducts).incart)
+function ManageProduct() {
+ setincart(!incart) 
+if(!product.alreadyincart(cartProducts)?.incart)
+{
+AddItems(product)
+return
+}
+removeItem(product)
+}
   return (
     <div className='bg-[#d6f5cd] p-4 rounded gap-2'>
      <div>
@@ -127,12 +139,14 @@ export const ProductCard = ({AddItems,removeItem,cartProducts,product}:IProduct)
 <p className='font-bold text-[#416f15] text-lg '>{product.title}</p>
 <p className='font-bold'>{product.price.toString()+"$"}</p>
 
-<button onClick={product.alreadyincart(cartProducts)?AddItems():removeItem()} className='bg-[#416f15] text-white rounded-md px-4 w-full py-2 '>{product.alreadyincart(cartProducts)?"Remove from cart":"Add to cart"}</button>
+<button onClick={
+ManageProduct
+} className='bg-[#416f15] text-white rounded-md px-4 w-full py-2 '>{incart?"Remove from cart":"Add to cart"}</button>
 </div>
     </div>
   )
 }
-function getImgUrl(name:string) {
+export function getImgUrl(name:string) {
    return new URL(`${name}`, import.meta.url).href
 }
 async function GetAllProducts() {
